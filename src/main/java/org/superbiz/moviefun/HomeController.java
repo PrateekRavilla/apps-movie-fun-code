@@ -1,5 +1,7 @@
 package org.superbiz.moviefun;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.superbiz.moviefun.albums.Album;
@@ -18,6 +20,7 @@ public class HomeController {
     private final AlbumsBean albumsBean;
     private final MovieFixtures movieFixtures;
     private final AlbumFixtures albumFixtures;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public HomeController(MoviesBean moviesBean, AlbumsBean albumsBean, MovieFixtures movieFixtures, AlbumFixtures albumFixtures) {
         this.moviesBean = moviesBean;
@@ -33,6 +36,11 @@ public class HomeController {
 
     @GetMapping("/setup")
     public String setup(Map<String, Object> model) {
+        logger.error("This id error");
+        logger.warn("This id warn");
+        logger.info("This id info");
+        logger.debug("This id debug");
+        logger.trace("This id trace");
         for (Movie movie : movieFixtures.load()) {
             moviesBean.addMovie(movie);
         }
